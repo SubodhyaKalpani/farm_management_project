@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Farm_Management.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.Label("Code")
+            </th>
+
+            <th>
+                @Html.Label("Product Name")
+            </th>
+            <th>
+                @Html.Label("Price")
+            </th>
+            <th>
+                @Html.Label("Qty")
+            </th>
+            <th>
+                @Html.Label("Reorder")
+            </th>
+            <th>
+                @Html.Label("Cost")
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Province)
+            </th>
+           
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.pcode)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.pdesc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.qty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.reorder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Province)
+                </td>
+                
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {  id=item.PId  }) |
+                 
+                    @Html.ActionLink("Delete", "Delete", new {  id=item.PId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

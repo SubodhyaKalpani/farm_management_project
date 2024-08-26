@@ -1,0 +1,491 @@
+﻿@model IEnumerable<Farm_Management.Models.Product>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+
+    <link href="~/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="~/css/style.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            font-family: "Open Sans", sans-serif;
+        }
+
+        h2 {
+            color: #000;
+            font-size: 26px;
+            font-weight: 300;
+            text-align: center;
+            text-transform: uppercase;
+            position: relative;
+            margin: 30px 0 80px;
+        }
+
+            h2 b {
+                color: #ffc000;
+            }
+
+            h2::after {
+                content: "";
+                width: 100px;
+                position: absolute;
+                margin: 0 auto;
+                height: 4px;
+                background: rgba(0, 0, 0, 0.2);
+                left: 0;
+                right: 0;
+                bottom: -20px;
+            }
+
+        .carousel {
+            margin: 50px auto;
+            padding: 0 70px;
+        }
+
+            .carousel .item {
+                min-height: 330px;
+                text-align: center;
+                overflow: hidden;
+            }
+
+                .carousel .item .img-box {
+                    height: 160px;
+                    width: 100%;
+                    position: relative;
+                }
+
+                .carousel .item img {
+                    max-width: 100%;
+                    max-height: 100%;
+                    display: inline-block;
+                    position: absolute;
+                    bottom: 0;
+                    margin: 0 auto;
+                    left: 0;
+                    right: 0;
+                }
+
+                .carousel .item h4 {
+                    font-size: 18px;
+                    margin: 10px 0;
+                }
+
+                .carousel .item .btn {
+                    color: #333;
+                    border-radius: 0;
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    background: none;
+                    border: 1px solid #ccc;
+                    padding: 5px 10px;
+                    margin-top: 5px;
+                    line-height: 16px;
+                }
+
+                    .carousel .item .btn:hover, .carousel .item .btn:focus {
+                        color: #fff;
+                        background: #000;
+                        border-color: #000;
+                        box-shadow: none;
+                    }
+
+                    .carousel .item .btn i {
+                        font-size: 14px;
+                        font-weight: bold;
+                        margin-left: 5px;
+                    }
+
+            .carousel .thumb-wrapper {
+                text-align: center;
+            }
+
+            .carousel .thumb-content {
+                padding: 15px;
+            }
+
+            .carousel .carousel-control {
+                height: 100px;
+                width: 40px;
+                background: none;
+                margin: auto 0;
+                background: rgba(0, 0, 0, 0.2);
+            }
+
+                .carousel .carousel-control i {
+                    font-size: 30px;
+                    position: absolute;
+                    top: 50%;
+                    display: inline-block;
+                    margin: -16px 0 0 0;
+                    z-index: 5;
+                    left: 0;
+                    right: 0;
+                    color: rgba(0, 0, 0, 0.8);
+                    text-shadow: none;
+                    font-weight: bold;
+                }
+
+            .carousel .item-price {
+                font-size: 13px;
+                padding: 2px 0;
+            }
+
+                .carousel .item-price strike {
+                    color: #999;
+                    margin-right: 5px;
+                }
+
+                .carousel .item-price span {
+                    color: #86bd57;
+                    font-size: 110%;
+                }
+
+            .carousel .carousel-control.left i {
+                margin-left: -3px;
+            }
+
+            .carousel .carousel-control.left i {
+                margin-right: -3px;
+            }
+
+            .carousel .carousel-indicators {
+                bottom: -50px;
+            }
+
+        .carousel-indicators li, .carousel-indicators li.active {
+            width: 10px;
+            height: 10px;
+            margin: 4px;
+            border-radius: 50%;
+            border-color: transparent;
+        }
+
+        .carousel-indicators li {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+            .carousel-indicators li.active {
+                background: rgba(0, 0, 0, 0.6);
+            }
+
+        .star-rating li {
+            padding: 0;
+        }
+
+        .star-rating i {
+            font-size: 14px;
+            color: #ffc000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar Start -->
+    <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="top-bar row gx-0 align-items-center d-none d-lg-flex">
+            <div class="col-lg-6 px-5 text-start">
+                <small><i class="fa fa-map-marker-alt me-2"></i>123 steet ,Colombo, Sri Lanka </small>
+                <small class="ms-4"><i class="fa fa-envelope me-2"></i>farmshop@gmail.com</small>
+            </div>
+
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+            <a href="/Home/Index" class="navbar-brand ms-4 ms-lg-0">
+                <h1 class="fw-bold text-primary m-0">F<span class="text-secondary">ar</span>m Shop</h1>
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+                    <a href="/Home/Index" class="nav-item nav-link active">Home</a>
+                    <a href="/Officer/OfficersView" class="nav-item nav-link">Officers</a>
+                    <a href="/Product/ProductSellView" class="nav-item nav-link">Products</a>
+                    @*<div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu m-0">
+                                <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                                <a href="feature.html" class="dropdown-item">Our Features</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="404.html" class="dropdown-item">404 Page</a>
+                            </div>
+                        </div>*@
+                    <a href="/Product/ProductDet" class="nav-item nav-link">User Guide</a>
+                    <a href="/Nakath/Profiles" class="nav-item nav-link">Nakath</a>
+                    <a href="/Home/Log_In" class="nav-item nav-link">Logout</a>
+                </div>
+                <div class="d-none d-lg-flex ms-2">
+
+                    <a class="btn-sm-square bg-white rounded-circle ms-3" href="/Product/Invoice">
+                        <small class="fa fa-shopping-bag text-body"></small>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <div class="container-fluid bg-light bg-icon my-5 py-6">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2><b>Products</b></h2>
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+
+
+                        <div class="carousel-inner">
+                            @using (Html.BeginForm("ProductSellView", "Product"))
+                            {
+                                <div class="container" style="padding-bottom:70px; align-content:center">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            @Html.DropDownList("searchString", (SelectList)ViewBag.Cat, "-Categories-",
+                                                                             new { @class = "form-control", @required = "required" })
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="submit" value="Search" class="btn btn-info glyphicon-search" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            }
+                            <div class="item carousel-item active">
+                                <div class="row">
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="col-sm-3">
+                                            <div class="thumb-wrapper">
+                                                <div class="img-box">
+                                                    <img src="@Url.Content(item.Img_Path)" class="img-responsive img-fluid" alt="">
+                                                </div>
+                                                <div class="thumb-content">
+
+                                                    <h4>@Html.DisplayFor(modelItem => item.pcode)</h4>
+
+                                                    <h4>@Html.DisplayFor(modelItem => item.pdesc)</h4>
+                                                    <p class="item-price">@Html.DisplayFor(modelItem => item.price) </p>
+
+                                                    <!--<div class="star-rating">
+                                                    <input type="number" id="@item.pcode" name="tentacles"
+                                                           min="10" max="100">-->
+                                                    @*<ul class="list-inline">
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                            <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                        </ul>*@
+                                                    <!--</div>-->
+                                                    @*<a class="btn btn-primary" onclick="SaveProduct(@item.pcode)">Add to Cart</a>*@
+                                                    @Html.ActionLink("Add to Cart", "ProductSave", new { id = item.PId })
+                                                    @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRelatedContent" onclick="ProductSaves()">*@
+                                                    @*<br />
+                                                        @Html.ActionLink("Click For", "ProductDetails", new { id = item.PId })*@
+
+
+                                                    @*Launch
+                                                            modal
+                                                        </button>*@
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                    <div class="modal fade right" id="modalRelatedContent" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+                                        <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
+                                            <!--Content-->
+                                            <div class="modal-content">
+                                                <!--Header-->
+                                                <div class="modal-header">
+                                                    <p class="heading">Add Qty</p>
+
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true" class="white-text">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <!--Body-->
+                                                <div class="modal-body">
+
+                                                    <div class="row">
+                                                        <div class="col-5">
+                                                            <img class="img-fluid" alt="">
+                                                        </div>
+
+                                                        <div class="col-7">
+                                                            <p><strong>My travel to paradise</strong></p>
+                                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit [...]</p>
+                                                            <button type="button" class="btn btn-info btn-md">Read more</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/.Content-->
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h1 class="fw-bold text-primary mb-4">F<span class="text-secondary">arm</span>Shop</h1>
+
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href="https://www.facebook.com/profile.php?id=100087087350192"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href="https://youtube.com/channel/UCT_ysbUdaYr3UFeOWAZp7EQ"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Address</h4>
+                    <p><i class="fa fa-map-marker-alt me-3"></i>123 steet ,Colombo, Sri Lanka</p>
+                    <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                    <p><i class="fa fa-envelope me-3"></i>farmshop@gmail.com</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Quick Links</h4>
+                    <a class="btn btn-link" href="/Home/Index">Home</a>
+                    <a class="btn btn-link" href="/Officer/OfficersView">Officers</a>
+                    <a class="btn btn-link" href="/Product/ProductSellView">Products</a>
+                    <a class="btn btn-link" href="/Product/ProductDet">User Guide</a>
+                    <a class="btn btn-link" href="/Nakath/Profiles">Nakath</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="container-fluid copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a href="#">Farm Shop</a>, All Right Reserved.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        Designed By Kalpani
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/wow/wow.min.js"></script>
+    <script src="~/lib/easing/easing.min.js"></script>
+    <script src="~/lib/waypoints/waypoints.min.js"></script>
+    <script src="~/lib/owlcarousel/owl.carousel.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Template/POS/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Template/POS/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/Template/POS/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/Template/POS/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="~/Template/POS/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Template/POS/js/demo/chart-area-demo.js"></script>
+    <script src="~/Template/POS/js/demo/chart-pie-demo.js"></script>
+    <!-- Template Javascript -->
+    <script src="~/js/main.js"></script>
+
+
+    <script>
+
+    function ProductSaves() {
+
+        alert(1);
+        //Qty = $("#Qty").val();
+        Qty= document.getElementById(pcode).value
+
+        $.ajax({
+            url: '@Url.Action("ProductSave", "Product")',
+            type: "GET",
+            dataType: "JSON",
+            data: { pCode: pcode, Qty: Qty },
+            success: function (data) {
+                if (data == true) {
+                    window.location.href = "/Product/Invoice";
+                }
+                else {
+                    alert("Save Failed");
+                    $.each(data, function (i, index) {
+
+                    });
+                }
+            }
+        });
+    }
+
+
+
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Sell Report</h2>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <input type="date" class="form-control" id="searchText" placeholder="Enter Date">
+    </div>
+    <div class="col-md-4">
+        <input type="date" class="form-control" id="searchText1" placeholder="Enter Date">
+    </div>
+
+    <div class="col-md-3">
+        <div class="col-md-offset-10 col-md-10">
+            <input type="button" id="btnSearch" value="Load" class="btn btn-primary btn-user btn-block" onclick="reportLoad();" />
+        </div>
+    </div>
+
+
+</div>
+<br />
+
+
+<div class="row"></div>
+<div class="row">
+
+
+
+
+</div>
+
+
+<div class="row" id="divReport">
+</div>
+<script>
+    function reportLoad() {
+
+        var id = 1;
+        var searchText = $("#searchText").val();
+        var searchText1 = $("#searchText1").val();
+
+        window.open('/Reports/Report.aspx?id='
+            + id + '&&searchText=' + searchText + '&&searchText1=' + searchText1, '_blank');
+
+    }
+
+
+
+</script>
+

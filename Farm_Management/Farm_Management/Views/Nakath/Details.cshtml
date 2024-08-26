@@ -1,0 +1,36 @@
+﻿@model Farm_Management.Models.NAKATH
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NAKATH</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+
+        <dd>
+            @Html.DisplayFor(model => model.YEAR)
+        </dd>
+
+     
+
+        <dd>
+            @Html.DisplayFor(model => model.MONTH)
+        </dd>
+
+       
+
+        <img src="@Url.Content(Model.IMG_PATH)" class="img-responsive img-fluid" alt="">
+
+        
+
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Back to List", "Index")
+</p>

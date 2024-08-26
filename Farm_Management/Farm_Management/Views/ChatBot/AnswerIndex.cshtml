@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewBag.Title = "Chat Answer";
+}
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Add Chat Bot Questions</h4>
+                        </div>
+                        <div class="content">
+                            <h5 class="title">@Model.QuestionRecord.CHAT_Q_DESCRIPTION</h5>
+                            <input type="hidden" id="QuestionID" value="@Model.QuestionRecord.CHAT_Q_ID" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Answer</h4>
+                        </div>
+                        <div class="content">
+                            <form>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="txtAnswerId" placeholder="Answer" value="@ViewBag.AnswerDescription" onkeyup="UpperCaseFunction()">
+                                </div>
+                                <br />
+                                <div class="col">
+                                    <button id="btnSubmitQuestion" value="0" type="button" class="btn btn-success btn-sm" onclick="SubmitAnswer()">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Chat Bot Question List</h4>
+                        </div>
+                        <div class="content">
+                            <table class="table table-bordered" style="width:98%">
+                                <thead>
+                                    <tr>
+                                        <th style="width:50%" scope="col">Description</th>
+                                        <th style="width:10%" scope="col">Status</th>
+                                        <th style="width:40%" scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div id="Scrollbardiv">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        @if (Model.AnswerList.Count > 0)
+                                        {
+                                            foreach (var item in Model.AnswerList)
+                                            {
+                                                <tr>
+                                                    <th style="width:50%">@item.CHAT_A_DESCRIPTION</th>
+                                                    <td style="width:10%">
+                                                        @if (item.CHAT_A_STATUS == 0)
+                                                        {
+                                                            <label>Active</label>
+                                                        }
+                                                        else if (item.CHAT_A_STATUS == 1)
+                                                        {
+                                                            <label>Inactive</label>
+                                                        }
+                                                    </td>
+                                                    <td style="width:40%">
+                                                        @if (item.CHAT_A_STATUS == 0)
+                                                        {
+                                                            <button type="button" class="btn btn-danger btn-sm" onclick="InactiveAnswer(@item.CHAT_A_ID)">Inactive</button>
+                                                        }
+                                                        else if (item.CHAT_A_STATUS == 1)
+                                                        {
+                                                            <button type="button" class="btn btn-success btn-sm" onclick="ActiveAnswer(@item.CHAT_A_ID)">Active</button>
+                                                        }
+                                                        <button type="button" class="btn btn-info btn-sm" onclick="SetAnswer(@item.CHAT_A_ID)">Set Answer</button>
+                                                        <button type="button" class="btn btn-warning btn-sm" onclick="EditAnswer(@item.CHAT_A_ID)">Edit Answer</button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <th style="width:100%" scope="row" colspan="4">No Answer Avalable</th>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        function UpperCaseFunction() {
+            var Answer = $("#txtAnswerId").val();
+            Answer = TitleCase(Answer);
+            document.getElementById('txtAnswerId').value = Answer;
+        }
+
+        const TitleCase = (string) => {
+            let sentence = string.toLowerCase().split(" ");
+            for (let i = 0; i < sentence.length; i++) {
+                sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
+            }
+
+            return sentence.join(" ");
+        };
+
+        function SubmitAnswer() {
+            var Answer = $("#txtAnswerId").val();
+            var QuestionId = $("#QuestionID").val();
+
+            var AnswerId = $("#btnSubmitQuestion").val();
+            if (AnswerId == 0) {
+                if (Answer.length > 0) {
+                    $.ajax({
+                        url: '@Url.Action("SaveAnswer","ChatBot")',
+                        type: "GET",
+                        dataType: "JSON",
+                        data: { QuestionId: QuestionId, Answer: Answer },
+                        success: function (data) {
+                            if (data) {
+                                window.location.reload(true);
+                            }
+                            else {
+                                alert("Somthing Wrong");
+                            }
+                        }
+                    });
+                }
+            }
+            else {
+                if (Answer.length > 0) {
+                    $.ajax({
+                        url: '@Url.Action("UpdateAnswer","ChatBot")',
+                        type: "GET",
+                        dataType: "JSON",
+                        data: { AnswerId: AnswerId, Answer: Answer },
+                        success: function (data) {
+                            if (data) {
+                                window.location.reload(true);
+                            }
+                            else {
+                                alert("Somthing Wrong");
+                            }
+                        }
+                    });
+                }
+            }
+
+        }
+
+        function SetAnswer(id) {
+            var QuestionId = $("#QuestionID").val();
+            $.ajax({
+                url: '@Url.Action("SetAnswer","ChatBot")',
+                type: "GET",
+                dataType: "JSON",
+                data: { QuestionId: QuestionId, AnswerId: id },
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                    else {
+                        alert("Somthing Wrong");
+                    }
+                }
+            });
+        }
+
+        function InactiveAnswer(id) {
+            var Ststus = "Inactive";
+            var Type = "Answer";
+            $.ajax({
+                url: '@Url.Action("ChangeStatus","ChatBot")',
+                type: "GET",
+                dataType: "JSON",
+                data: { Id: id, Type: Type, Ststus: Ststus},
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                    else {
+                        alert("Somthing Wrong");
+                    }
+                }
+            });
+        }
+
+        function ActiveAnswer(id) {
+            var Ststus = "Active";
+            var Type = "Answer";
+
+            $.ajax({
+                url: '@Url.Action("ChangeStatus","ChatBot")',
+                type: "GET",
+                dataType: "JSON",
+                data: { Id: id, Type: Type, Ststus: Ststus },
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                    else {
+                        alert("Somthing Wrong");
+                    }
+                }
+            });
+        }
+
+        function EditAnswer(id) {
+            document.getElementById('btnSubmitQuestion').value = id;
+            document.getElementById("btnSubmitQuestion").innerHTML = "Update";
+            $.ajax({
+                url: '@Url.Action("GetAnswer", "ChatBot")',
+                type: "GET",
+                dataType: "JSON",
+                data: {AnswerId: id },
+                success: function (data) {
+                    document.getElementById('txtAnswerId').value = data;
+                }
+            });
+        }
+
+    </script>

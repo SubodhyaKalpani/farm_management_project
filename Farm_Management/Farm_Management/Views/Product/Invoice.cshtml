@@ -1,0 +1,434 @@
+﻿@model IEnumerable<Farm_Management.Models.tmpcart>
+@{
+    Layout = null;
+    decimal totalamount = 0.00M;
+    decimal grandtot = 0.00M;
+}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<style>
+    .Bordeless {
+        border: none;
+    }
+
+
+
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Full-width input fields */
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+        /* Add a background color when the inputs get focus */
+        input[type=text]:focus, input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+    /* Set a style for all buttons */
+    button {
+        background-color: #04AA6D;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+
+        button:hover {
+            opacity: 1;
+        }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        padding: 14px 20px;
+        background-color: #f44336;
+    }
+
+    /* Float cancel and signup buttons and add an equal width */
+    .cancelbtn, .signupbtn {
+        float: left;
+        width: 50%;
+    }
+
+    /* Add padding to container elements */
+    .container {
+        padding: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: #474e5d;
+        padding-top: 50px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    /* Style the horizontal ruler */
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    /* The Close Button (x) */
+    .close {
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #f1f1f1;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #f44336;
+            cursor: pointer;
+        }
+
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    /* Change styles for cancel button and signup button on extra small screens */
+    media screen and (max-width: 300px) {
+        .cancelbtn, .signupbtn
+
+    {
+        width: 100%;
+    }
+    }
+</style>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Invoice No:<b><input id="invno" class="Bordeless" value="@ViewBag.INV" disabled></b>
+            <br />
+            Date:<strong id="date"></strong>
+
+            <span class="float-right"> <strong>Status:</strong> Pending</span>
+
+        </div>
+        <div class="card-body">
+            @*<button class="fa fa-plus" onclick="openForm()"></button>*@
+            <a href="/Product/ProductSellView" @*onclick="document.getElementById('id01').style.display='block'"*@ style="width:auto;"><i class="fa fa-plus"></i></a>
+
+
+
+
+            <div class="table-responsive-sm">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="center">#</th>
+                            <th>Item</th>
+
+
+                            <th class="right">Unit Cost</th>
+                            <th class="center">Qty</th>
+                            <th class="right">Total</th>
+                            <th class="right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            totalamount += Convert.ToDecimal(item.total);
+                            grandtot = totalamount;
+
+                            <tr>
+                                <td class="center"> @Html.DisplayFor(modelItem => item.id)</td>
+                                <td class="left strong"> @Html.DisplayFor(modelItem => item.item) </td>
+
+
+                                <td class="right"> @Html.DisplayFor(modelItem => item.price)</td>
+                                <td class="center"> @Html.DisplayFor(modelItem => item.qty) </td>
+                                <td class="right"> @Html.DisplayFor(modelItem => item.total)</td>
+                                <td class="right">
+                                    @*<a href="#"  style="width:auto;" new{id = item.id}>
+                                            <i class="fa fa-plus"></i>
+                                        </a>*@
+
+                                    <a href="#" onclick="btn_Delete()" style="width:auto;">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                    @Html.ActionLink("Delete", "Deleteinv", new { id = item.id })
+                                </td>
+                            </tr>
+                        }
+                        @*<tr>
+                                <td>
+                                    <a href="#"><i class="fa fa-plus"></i></a>
+                                </td>
+                            </tr>*@
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-5">
+
+                </div>
+
+                <div class="col-lg-4 col-sm-5 ml-auto">
+                    <table class="table table-clear">
+                        <tbody>
+                            <tr>
+                                <td class="left">
+                                    <strong>Subtotal</strong>
+                                </td>
+                                <td class="right">
+                                    <input id="subtots" class="Bordeless" value="@totalamount">
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="left">
+                                    <button type="submit" onclick="btn_process()" class="btn btn-primary btn-user">Process</button>
+                                    @*<input type="submit" value="Process" class="btn btn-primary btn-user" onclick="btn_process()" />*@
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+    function getRef(code) {
+        $.ajax({
+            url: '@Url.Action("GetRefId", "Product")',
+            type: "GET",
+            data: { "id": code },
+            "success": function (data) {
+                if (data != null) {
+                    var vdata = data;
+                    //alert(vdata.ban);
+
+                    $("#category").val(vdata.seq);
+                    $("#price").val(vdata.ban);
+                }
+            }
+        });
+    }
+    //getTotal
+    function getTotal(qty) {
+        var Price = $('#price').val();
+       // debugger
+        $.ajax({
+            url: '@Url.Action("GetTotla", "Product")',
+            type: "GET",
+            data: { "qty": qty, "price": Price },
+            "success": function (data) {
+                if (data != null) {
+
+                    $("#total").val(data);
+                }
+            }
+        });
+    }
+
+    function btn_Delete() {
+       // debugger
+         id = $('#id').val();
+
+       // debugger
+         $.ajax({
+            url: '@Url.Action("Deleteinv", "Product")',
+            type: "GET",
+             dataType: "JSON",
+             data: { id: id },
+            success: function (data) {
+                if (data == true) {
+                   // alert("Successfully Save!")
+                    window.location.href = "/Invoice/Index";
+                }
+                else {
+                    alert("Unsuccessfully Save!");
+                    $.each(data, function (i, index) {
+
+                    });
+                }
+            }
+        });
+    }
+
+    function btn_Save() {
+
+
+        Item = $("#Item_Id").val();
+        category = $("#category").val();
+        Price = $("#price").val();
+        Qty = $("#qty").val();
+        Total = $("#total").val();
+        inv_no = $("#invnoA").val();
+
+        $.ajax({
+            url: '@Url.Action("Createtmpinvoice", "Product")',
+            type: "GET",
+            dataType: "JSON",
+            data: { Item: Item, category: category, Price: Price, Qty: Qty, Total: Total, inv_no: inv_no},
+            success: function (data) {
+                if (data == true) {
+                   // alert("Successfully Save!")
+                    window.location.href = "/Invoice/Index";
+                }
+                else {
+                    alert("Unsuccessfully Save!");
+                    $.each(data, function (i, index) {
+
+                    });
+                }
+            }
+        });
+    }
+
+
+    function btn_process()
+    {
+        var invno = $("#invno").val();
+        var subtots = $("#subtots").val();
+
+
+
+        $.ajax({
+            url: '@Url.Action("ProcessInv", "Product")',
+            method: 'POST',
+            data: {
+                invno: invno, subtots: subtots
+            },
+
+
+            success: function (data) {
+                if (data == true) {
+                     //alert("Successfully Save!")
+                    window.location.href = "/Home/Index";
+                    //if (confirm('Are you sure you want to print invoice?')) {
+                    //    // Save it!
+                    //    var id = "6";
+                    //    window.open('/Reports/Brands.aspx?id='
+                    //        + id + '&&searchText=' + invno, '_blank');
+
+                    //    window.location.href = "/Invoice/Index";
+                    //} else {
+                    //    // Do nothing!
+                    //    window.location.href = "/Invoice/Index";
+                    //}
+
+
+
+
+
+
+                }
+                else {
+                    alert("Unsuccessfully Save!");
+                    $.each(data, function (i, index) {
+
+                    });
+                }
+            }
+        });
+
+    }
+    @*function btn_process() {
+        var invno = $("#invno").val();
+        //alert(invno);
+        debugger
+        var txt;
+        if (confirm("Press a button!")) {
+
+            txt = "You pressed OK!";
+
+            $.ajax({
+            url: '@Url.Action("ProcessInv", "Invoice")',
+            type: "POST",
+            dataType: "JSON",
+            data: {invno: invno},
+            success: function (data) {
+                if (data == true) {
+                    alert("Successfully Save!")
+                    window.location.href = "/Invoice/Index";
+                }
+                else {
+                    alert("Unsuccessfully Save!");
+                    //$.each(data, function (i, index) {
+
+                    //});
+                }
+            }
+        });
+        } else {
+            txt = "You pressed Cancel!";
+        }
+
+    }*@
+
+
+    n = new Date();
+    y = n.getFullYear();
+    m = n.getMonth() + 1;
+    d = n.getDate();
+    document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+
+
+
+</script>
+

@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FARMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Confirm_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Enter_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Enter_User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Bod" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telephone_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Entered_User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Entered_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Modify_User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Modify_Date" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityContainer Name="FARMEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Logins" EntityType="Self.Login" />
+    <EntitySet Name="Members" EntityType="Self.Member" />
+    <FunctionImport Name="Proc_INCREMENT_ID" ReturnType="Collection(String)">
+      <Parameter Name="TYPE" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Proc_INCREMENT_ID_Update" ReturnType="Collection(String)">
+      <Parameter Name="TYPE" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="PRODUCT_TYPE" EntityType="FARMModel.PRODUCT_TYPE" />
+    <EntitySet Name="Products" EntityType="FARMModel.Product" />
+    <EntitySet Name="PROVINCEs" EntityType="FARMModel.PROVINCE" />
+    <EntitySet Name="tblStockIns" EntityType="FARMModel.tblStockIn" />
+    <FunctionImport Name="Proc_QTY_Update">
+      <Parameter Name="REFNO" Mode="In" Type="String" />
+      <Parameter Name="PCODE" Mode="In" Type="String" />
+      <Parameter Name="QTY" Mode="In" Type="Int32" />
+      <Parameter Name="VENDOR" Mode="In" Type="String" />
+      <Parameter Name="INVOICENO" Mode="In" Type="String" />
+      <Parameter Name="DESCRIPTION" Mode="In" Type="String" />
+      <Parameter Name="COST" Mode="In" Type="Int32" />
+      <Parameter Name="UNITPRICE" Mode="In" Type="Int32" />
+      <Parameter Name="OURPRICE" Mode="In" Type="Int32" />
+      <Parameter Name="LOYALITYPRICE" Mode="In" Type="Int32" />
+      <Parameter Name="EXDATE" Mode="In" Type="DateTime" />
+      <Parameter Name="GROSS_TOT" Mode="In" Type="Int32" />
+      <Parameter Name="DISCOUNT" Mode="In" Type="Int32" />
+      <Parameter Name="NETOT" Mode="In" Type="Int32" />
+      <Parameter Name="CONTACTPERS" Mode="In" Type="String" />
+      <Parameter Name="ADDRES" Mode="In" Type="String" />
+      <Parameter Name="TELEPHONE" Mode="In" Type="String" />
+      <Parameter Name="DUEDATE" Mode="In" Type="DateTime" />
+      <Parameter Name="PAIDAMT" Mode="In" Type="Int32" />
+      <Parameter Name="PAYEDSTATUS" Mode="In" Type="String" />
+      <Parameter Name="FQTY" Mode="In" Type="Int32" />
+      <Parameter Name="PID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="PRODUCT_DETAILS" EntityType="FARMModel.PRODUCT_DETAILS" />
+    <EntitySet Name="V_Product_Det" EntityType="FARMModel.V_Product_Det" />
+    <EntitySet Name="NAKATHs" EntityType="FARMModel.NAKATH" />
+    <EntitySet Name="tblprocntls" EntityType="FARMModel.tblprocntl" />
+    <EntitySet Name="tblCarts" EntityType="FARMModel.tblCart" />
+    <EntitySet Name="tblCompanies" EntityType="FARMModel.tblCompany" />
+    <FunctionImport Name="PROC_SELL" ReturnType="Collection(FARMModel.PROC_SELL_Result)">
+      <Parameter Name="FDATE" Mode="In" Type="DateTime" />
+      <Parameter Name="LDATE" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="Proc_PROFIT_RPT" ReturnType="Collection(FARMModel.Proc_PROFIT_RPT_Result)">
+      <Parameter Name="DATE" Mode="In" Type="DateTime" />
+      <Parameter Name="DATE1" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="tmpcarts" EntityType="FARMModel.tmpcart" />
+    <EntitySet Name="FARM_CHAT_ANSWERS" EntityType="FARMModel.FARM_CHAT_ANSWERS" />
+    <EntitySet Name="FARM_CHAT_QUESTIONS" EntityType="FARMModel.FARM_CHAT_QUESTIONS" />
+    <EntitySet Name="Staffs" EntityType="FARMModel.Staff" />
+  </EntityContainer>
+  <EntityType Name="PRODUCT_TYPE">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="P_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="PId" />
+    </Key>
+    <Property Name="PId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pcode" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="barcode" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pdesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="qty" Type="Double" />
+    <Property Name="reorder" Type="Double" />
+    <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Brand_Id" Type="Int32" />
+    <Property Name="Category_Id" Type="Int32" />
+    <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Product_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Img_Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PROVINCE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="P_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblStockIn">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="refno" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="pcode" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="qty" Type="Double" />
+    <Property Name="sdate" Type="DateTime" Precision="3" />
+    <Property Name="stockinby" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="vendor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="InvoiceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Cost" Type="Double" />
+    <Property Name="TotalCost" Type="Double" />
+    <Property Name="UnitPrice" Type="Double" />
+    <Property Name="OurPrice" Type="Double" />
+    <Property Name="LoyalityPrice" Type="Double" />
+    <Property Name="ExpireDate" Type="DateTime" Precision="0" />
+    <Property Name="GrossTotal" Type="Double" />
+    <Property Name="Discounts" Type="Double" />
+    <Property Name="NetTotal" Type="Double" />
+    <Property Name="ContactPerson" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TelephoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DueDate" Type="DateTime" Precision="0" />
+    <Property Name="PaidAmount" Type="Double" />
+    <Property Name="IsFullPayed" Type="Boolean" />
+    <Property Name="FreeQty" Type="Double" />
+  </EntityType>
+  <EntityType Name="PRODUCT_DETAILS">
+    <Key>
+      <PropertyRef Name="PD_ID" />
+    </Key>
+    <Property Name="PD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="P_ID" Type="Int32" />
+    <Property Name="DESCR" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DATE" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="V_Product_Det">
+    <Key>
+      <PropertyRef Name="PId" />
+      <PropertyRef Name="pcode" />
+      <PropertyRef Name="PD_ID" />
+    </Key>
+    <Property Name="PId" Type="Int32" Nullable="false" />
+    <Property Name="pcode" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="barcode" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pdesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="qty" Type="Double" />
+    <Property Name="reorder" Type="Double" />
+    <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Brand_Id" Type="Int32" />
+    <Property Name="Category_Id" Type="Int32" />
+    <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Product_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Img_Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PD_ID" Type="Int32" Nullable="false" />
+    <Property Name="P_ID" Type="Int32" />
+    <Property Name="DESCR" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DATE" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="NAKATH">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="YEAR" Type="Int32" />
+    <Property Name="MONTH" Type="Int32" />
+    <Property Name="IMG_PATH" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="Int32" />
+    <Property Name="DATE" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tblprocntl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Time" Type="Time" Precision="7" />
+  </EntityType>
+  <EntityType Name="tblCart">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="transno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ourprice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="qty" Type="Double" />
+    <Property Name="Linedisc" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="total" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="sdate" Type="DateTime" Precision="0" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="cashier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GrossTotalDiscount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="HiddenOurPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="LoyalityPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CashAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CreditCardAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CreditCardInterest" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CreditAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PayingAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NetTotal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="LineDiscPer" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="LineDiscAmt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalBillDiscPer" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalBillDiscAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalBillDiscPerAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="BillPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SinhalaDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DifferentDisc" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PrintLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ItemCount" Type="Double" />
+    <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TotalDiscounts" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Counter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalCost" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="tblCompany">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Address1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Tel1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Tel2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Email_Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="WebSite" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <ComplexType Name="PROC_SELL_Result">
+    <Property Type="String" Name="transno" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="pcode" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="pdesc" Nullable="true" />
+    <Property Type="Decimal" Name="PRICE" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Double" Name="qty" Nullable="true" />
+    <Property Type="String" Name="cashier" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="sdate" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Proc_PROFIT_RPT_Result">
+    <Property Type="String" Name="transno" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="pdesc" Nullable="true" />
+    <Property Type="Decimal" Name="ourprice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Cost" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="profit" Nullable="true" Precision="19" Scale="2" />
+  </ComplexType>
+  <EntityType Name="tmpcart">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Inv_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="itm_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="item" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Double" />
+    <Property Name="qty" Type="Int32" />
+    <Property Name="total" Type="Double" />
+    <Property Name="subtotal" Type="Double" />
+    <Property Name="Discount" Type="Int32" />
+    <Property Name="vat" Type="Double" />
+    <Property Name="Grandtotal" Type="Double" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="img_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="FARM_CHAT_ANSWERS">
+    <Key>
+      <PropertyRef Name="CHAT_A_ID" />
+    </Key>
+    <Property Name="CHAT_A_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CHAT_A_DESCRIPTION" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <Property Name="CHAT_A_STATUS" Type="Int32" Nullable="false" />
+    <Property Name="CHAT_A_CREATE_BY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CHAT_A_CREATE_DATE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CHAT_A_MODIFIED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CHAT_A_MODIFIED_DATE" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="FARM_CHAT_QUESTIONS">
+    <Key>
+      <PropertyRef Name="CHAT_Q_ID" />
+    </Key>
+    <Property Name="CHAT_Q_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CHAT_Q_ANSWER_ID" Type="Int32" Nullable="false" />
+    <Property Name="CHAT_Q_DESCRIPTION" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <Property Name="CHAT_Q_STATUS" Type="Int32" Nullable="false" />
+    <Property Name="CHAT_Q_CREATE_BY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CHAT_Q_CREATE_DATE" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CHAT_Q_MODIFIED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CHAT_Q_MODIFIED_DATE" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Bod" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Province" Type="Int32" Nullable="false" />
+    <Property Name="Telephone_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Job_Position" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Entered_User" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Entered_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Modify_User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Modify_Date" Type="DateTime" Precision="0" />
+    <Property Name="Pro_Pic" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

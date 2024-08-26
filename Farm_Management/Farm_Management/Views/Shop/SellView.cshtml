@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Farm_Management.Models.tblCart>
+
+@{
+    ViewBag.Title = "SellView";
+}
+
+<h2>Sell View</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.transno)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.transno)
+        </td>
+       
+        <td>
+            
+            @Html.ActionLink("Delivered", "Details", new { id=item.transno }) |
+            @Html.ActionLink("Not Deliver", "Delete", new { id=item.transno })
+        </td>
+    </tr>
+}
+
+</table>

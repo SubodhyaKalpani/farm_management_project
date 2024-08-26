@@ -1,0 +1,160 @@
+﻿@model Farm_Management.Models.Category
+
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Code Proudly Presents By Themexpert</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Css -->
+    <link href="~/Content/css/nivo-slider.css" rel="stylesheet" />
+    <link href="~/Content/css/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/css/owl.theme.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Content/css/responsive.css" rel="stylesheet" />
+
+
+
+    <!-- jS -->
+
+
+    <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/jquery.nivo.slider.js"></script>
+    <script src="~/Content/js/owl.carousel.min.js"></script>
+    <script src="~/Content/js/jquery.nicescroll.js"></script>
+    <script src="~/Content/js/jquery.scrollUp.min.js"></script>
+    <script src="~/Content/js/main.js"></script>
+</head>
+<body>
+    <section id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <p class="contact-action"><i class="fa fa-phone-square"></i>IN CASE OF ANY QUESTIONS, CALL THIS NUMBER: <strong>+565 975 658</strong></p>
+                </div>
+                <div class="col-md-3 clearfix">
+                    @*<ul class="login-cart">
+                            <li>
+                                <a data-toggle="modal" data-target="#myModal" href="#">
+                                    <i class="fa fa-user"></i>
+                                    Login
+                                </a>
+                            </li>
+                            <li>
+                                <div class="cart dropdown">
+                                    <a data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart"></i>Cart(1)</a>
+                                    <div class="dropdown-menu dropup">
+                                        <span class="caret"></span>
+                                        <ul class="media-list">
+                                            <li class="media">
+                                                <img class="pull-left" src="images/product-item.jpg" alt="">
+                                                <div class="media-body">
+                                                    <h6>
+                                                        Italian Sauce
+                                                        <span>$250</span>
+                                                    </h6>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <button class="btn btn-primary btn-sm">Checkout</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>*@
+                </div>
+                <div class="col-md-2">
+                    <div class="search-box">
+                        <div class="input-group">
+                            <input placeholder="Search Here" type="text" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"></button>
+                            </span>
+                        </div><!-- /.input-group -->
+                    </div><!-- /.search-box -->
+                </div>
+            </div> <!-- End Of /.row -->
+        </div>	<!-- End Of /.Container -->
+        <!-- MODAL Start
+            ================================================== -->
+
+
+    </section>
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="#">
+                        <img src="~/Content/images/Farm_Logo.jpg" />
+                        @*<img src="images/logo.png" alt="logo">*@
+                    </a>
+                </div>	<!-- End of /.col-md-12 -->
+            </div>	<!-- End of /.row -->
+        </div>	<!-- End of /.container -->
+    </header> <!-- End of /Header -->
+    <!-- MENU Start
+    ================================================== -->
+
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div> <!-- End of /.navbar-header -->
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav nav-main">
+                    <li class="active"><a href="/Home/Index">HOME</a></li>
+                    <li><a href="/Shop/Index">SHOP</a></li>
+                    <li><a href="/Category/YIndex">CATEGORY</a></li>
+                    <li><a href="/Product/Index">PRODUCTS</a></li>
+                    <li><a href="/Officer/Index">OFFICER</a></li>  <!-- End of /.dropdown -->
+
+
+                </ul> <!-- End of /.nav-main -->
+            </div>	<!-- /.navbar-collapse -->
+        </div>	<!-- /.container-fluid -->
+    </nav>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Category</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Category")
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.Category1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Category1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+
+</body>
+</html>

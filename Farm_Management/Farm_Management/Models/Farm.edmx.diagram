@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2a566e4c90bf4fc2b22c09b64e0f90e5" Name="Diagram1" ZoomLevel="89">
+        <EntityTypeShape EntityType="FARMModel.Category" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FARMModel.Login" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FARMModel.Member" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FARMModel.PRODUCT_TYPE" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="FARMModel.Product" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="FARMModel.PROVINCE" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="FARMModel.tblStockIn" Width="1.5" PointX="8.375" PointY="5.75" />
+        <EntityTypeShape EntityType="FARMModel.PRODUCT_DETAILS" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FARMModel.V_Product_Det" Width="1.5" PointX="10.375" PointY="3.75" />
+        <EntityTypeShape EntityType="FARMModel.NAKATH" Width="1.5" PointX="10.375" PointY="9.75" />
+        <EntityTypeShape EntityType="FARMModel.tblprocntl" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FARMModel.tblCart" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FARMModel.tblCompany" Width="1.5" PointX="12.375" PointY="3.75" />
+        <EntityTypeShape EntityType="FARMModel.tmpcart" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="FARMModel.FARM_CHAT_ANSWERS" Width="1.5" PointX="12.375" PointY="7.75" />
+        <EntityTypeShape EntityType="FARMModel.FARM_CHAT_QUESTIONS" Width="1.5" PointX="7.375" PointY="12.75" />
+        <EntityTypeShape EntityType="FARMModel.Staff" Width="1.5" PointX="9.375" PointY="12.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

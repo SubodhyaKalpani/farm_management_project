@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Farm_Management.Models.tblStockIn>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Goods Received Note</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Ref No")
+        </th>
+        <th>
+            @Html.Label("Product ID")
+        </th>
+        <th>
+            @Html.Label("Qty")
+        </th>
+
+        <th>
+            @Html.Label("Invoice No")
+        </th>
+
+
+
+        <th>
+            @Html.Label("Expire Date")
+        </th>
+     
+       
+        @*<th>
+                @Html.Label("Payed Status")
+            </th>*@
+
+        @*<th></th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.refno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qty)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceNo)
+            </td>
+
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpireDate)
+            </td>
+           
+            
+
+            
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.IsFullPayed)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                </td>*@
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,207 @@
+﻿
+@{
+    ViewBag.Title = "Chat Questions";
+}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Add Chat Bot Questions</h4>
+                        </div>
+                        <div class="content">
+                            <form>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="txtQuestionId" placeholder="Question" onkeyup="UpperCaseFunction()">
+                                </div>
+                                <br />
+                                <div class="col">
+                                    <button id="btnSubmitQuestion" value="0" type="button" class="btn btn-success btn-sm" onclick="SubmitQuestion()">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Chat Bot Question List</h4>
+                        </div>
+                        <div class="content">
+                            <table class="table table-bordered" style="width:98%">
+                                <thead>
+                                    <tr>
+                                        <th style="width:40%" scope="col">Description</th>
+                                        <th style="width:10%" scope="col">Status</th>
+                                        <th style="width:10%" scope="col">User</th>
+                                        <th style="width:40%" scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div id="Scrollbardiv">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        @if (Model.QuestionList.Count > 0)
+                                        {
+                                            foreach (var item in Model.QuestionList)
+                                            {
+                                                <tr>
+                                                    <th style="width:40%">@item.CHAT_Q_DESCRIPTION</th>
+                                                    <td style="width:10%">
+                                                        @if (item.CHAT_Q_STATUS == 0)
+                                                        {
+                                                            <label>Active</label>
+                                                        }
+                                                        else if (item.CHAT_Q_STATUS == 1)
+                                                        {
+                                                            <label>Inactive</label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label>No Avalable Answer</label>
+                                                        }
+                                                    </td>
+                                                    <td style="width:10%">@item.CHAT_Q_CREATE_BY</td>
+                                                    <td style="width:40%">
+                                                        @if (item.CHAT_Q_STATUS == 0)
+                                                        {
+                                                            <button type="button" class="btn btn-danger btn-sm" onclick="InactiveAnswer(@item.CHAT_Q_ID)">Inactive</button>
+                                                        }
+                                                        else if (item.CHAT_Q_STATUS == 1)
+                                                        {
+                                                            <button type="button" class="btn btn-success btn-sm" onclick="ActiveAnswer(@item.CHAT_Q_ID)">Active</button>
+                                                        }
+                                                        <button type="button" class="btn btn-info btn-sm" onclick="AddAnswer(@item.CHAT_Q_ID)">Answer</button>
+                                                        <button type="button" class="btn btn-warning btn-sm" onclick="EditQuestion(@item.CHAT_Q_ID)">Edit Question</button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <th style="width:100%" scope="row" colspan="4">No Questions Avalable</th>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function UpperCaseFunction() {
+        var Question = $("#txtQuestionId").val();
+        Question = Question.toUpperCase();
+        document.getElementById('txtQuestionId').value = Question;
+    }
+
+    function SubmitQuestion() {
+            var Question = $("#txtQuestionId").val();
+            Question = Question.toUpperCase();
+            var QuestionId = $("#btnSubmitQuestion").val();
+            if (QuestionId == 0 && Question.length > 0) {
+                $.ajax({
+                    url: '@Url.Action("SaveQuestion","ChatBot")',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: { Question: Question },
+                    success: function (data) {
+                        if (data) {
+                            window.location.reload(true);
+                        }
+                        else {
+                            alert("Somthing Wrong");
+                        }
+                    }
+                });
+            }
+            else if (Question.length > 0) {
+                $.ajax({
+                    url: '@Url.Action("EditQuestion","ChatBot")',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: { Question: Question, QuestionId: QuestionId },
+                    success: function (data) {
+                        if (data) {
+                            window.location.reload(true);
+                        }
+                        else {
+                            alert("Somthing Wrong");
+                        }
+                    }
+                });
+            }
+            else {
+                alert("Enter Question Please");
+            }
+
+        }
+
+        function InactiveAnswer(id) {
+            var Ststus = "Inactive";
+            var Type = "Question";
+            $.ajax({
+                url: '@Url.Action("ChangeStatus","ChatBot")',
+                type: "GET",
+                dataType: "JSON",
+                data: { Id: id, Type: Type, Ststus: Ststus },
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                    else {
+                        alert("Somthing Wrong");
+                    }
+                }
+            });
+        }
+
+        function ActiveAnswer(id) {
+            var Ststus = "Active";
+            var Type = "Question";
+            $.ajax({
+                url: '@Url.Action("ChangeStatus","ChatBot")',
+                type: "GET",
+                dataType: "JSON",
+                data: { Id: id, Type: Type, Ststus: Ststus },
+                success: function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                    else {
+                        alert("Somthing Wrong");
+                    }
+                }
+            });
+        }
+
+        function EditQuestion(id) {
+            document.getElementById('btnSubmitQuestion').value = id;
+            document.getElementById("btnSubmitQuestion").innerHTML = "Update";
+            $.ajax({
+                url: '@Url.Action("GetQuestion","ChatBot")',
+                type: "GET",
+                dataType: "JSON",
+                data: { QuestionId: id},
+                success: function (data) {
+                    document.getElementById('txtQuestionId').value = data;
+                }
+            });
+        }
+
+        function AddAnswer(id) {
+            window.location.href = '/ChatBot/AnswerIndex?QuestionId=' + id ;
+        }
+
+    </script>
+

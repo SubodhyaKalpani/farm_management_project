@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Farm_Management.Models.Staff>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+   
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.Label("Name")
+            </th>
+            <th>
+                @Html.Label("DOB")
+            </th>
+          
+            <th>
+                @Html.Label("Telephone No")
+            </th>
+            <th>
+                @Html.Label("Email")
+            </th>
+            <th>
+                @Html.Label("Job Position")
+            </th>
+            
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bod)
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telephone_No)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Job_Position)
+                </td>
+                
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                   
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>

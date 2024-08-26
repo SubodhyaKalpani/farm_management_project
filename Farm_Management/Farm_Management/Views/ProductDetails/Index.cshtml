@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Farm_Management.Models.ProductDetailsL>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.PRODUCT)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCT)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.PD_ID }) |
+          
+            @Html.ActionLink("Delete", "Delete", new { id=item.PD_ID  })
+        </td>
+    </tr>
+}
+
+</table>

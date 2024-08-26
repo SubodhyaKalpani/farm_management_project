@@ -1,0 +1,100 @@
+﻿@model Farm_Management.Models.V_Product_Det
+
+@{
+    Layout = null;
+}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<style>
+    .divider-text {
+        position: relative;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+        .divider-text span {
+            padding: 7px;
+            font-size: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .divider-text:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            top: 55%;
+            left: 0;
+            z-index: 1;
+        }
+
+    .btn-facebook {
+        background-color: #405D9D;
+        color: #fff;
+    }
+
+    .btn-twitter {
+        background-color: #42AEEC;
+        color: #fff;
+    }
+</style>
+<div class="container">
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h2>Product Details</h2>
+
+            <div>
+
+                <hr />
+                <dl class="dl-horizontal">
+
+
+
+                    <dd>
+                        @Html.DisplayFor(model => model.pcode)
+                    </dd>
+
+
+
+
+
+                    <dd>
+                        @Html.DisplayFor(model => model.pdesc)
+                    </dd>
+
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+
+
+
+                    <dd>
+                        @*@Html.DisplayFor(model => model.Img_Path)*@
+                        <img src="@Url.Content(Model.Img_Path)" width="200" height="200" alt="">
+                    </dd>
+
+
+
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DESCR)
+                    </dd>
+
+
+
+                </dl>
+            </div>
+
